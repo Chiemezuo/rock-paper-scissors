@@ -29,9 +29,9 @@ function checker(playerSelection, computerPlay, arr) {
       return `You drew`;
       break;
     case 1:
-      return `You lost, ${playerSelection} loses to ${computerPlay}`;
+      return `You lose, ${computerPlay} beats ${playerSelection}`;
       break;
     default:
-      return `You won, ${playerSelection} wins ${computerPlay}`
+      return `You won, ${playerSelection} beats ${computerPlay}`
   }
 }
