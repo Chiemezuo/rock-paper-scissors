@@ -1,2 +1,6 @@
 const playerSelection = prompt("Rock, paper, or scissors? ")
-console.log(playerSelection)
+
+const computerPlay = () => {
+  const arr = ["rock", "paper", "scissors"]
+  return arr[Math.floor(Math.random() * 3)]
+}
