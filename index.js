@@ -1,1 +1,2 @@
-console.log("na we dey here")
+const playerSelection = prompt("Rock, paper, or scissors? ")
+console.log(playerSelection)
