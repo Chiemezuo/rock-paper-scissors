@@ -1,13 +1,30 @@
-const playerSelection = prompt("Rock, paper, or scissors? ").toLowerCase()
-
 const computerPlay = () => {
   const arr = ["rock", "paper", "scissors"]
   return arr[Math.floor(Math.random() * 3)]
 }
 
-const computerSelection = computerPlay()
+function game() {
+  let playerPoints = 0;
+  let computerPoints = 0;
 
-console.log(playRound(playerSelection, computerSelection))
+  for (let i = 0; i < 5; i++){
+    const playerSelection = prompt("Rock, paper, or scissors? ").toLowerCase().trim()
+    const computerSelection = computerPlay()
+    const winner = playRound(playerSelection, computerSelection)
+    console.group(`Round ${i+1}`)
+      if (winner === 0){
+        return console.log("You clearly do not want to play")
+      }
+      if (winner !== "draw"){
+        winner === "player" ? playerPoints+=1 : computerPoints+=1
+      }
+    console.groupEnd()
+  }
+
+  playerPoints === computerPoints ? console.log('stalemate') : playerPoints > computerPoints ? console.log("Winner winner, chicken dinner") : console.log("You got your ass kicked")
+}
+
+game()
 
 function playRound(playerSelection, computerSelection) {
   switch (playerSelection){
@@ -21,19 +38,22 @@ function playRound(playerSelection, computerSelection) {
       return checker(playerSelection, computerSelection, ["scissors","rock","paper"])
       break;
     default:
-      return "You clearly do not want to play"
+      return 0
   }
 }
 
 function checker(playerSelection, computerSelection, arr) {
   switch (arr.indexOf(computerSelection)) {
     case 0:
-      return `You drew`;
+       console.log(`You drew`);
+       return "draw"
       break;
     case 1:
-      return `You lose, ${computerSelection} beats ${playerSelection}`;
+      console.log(`You lost, ${computerSelection} beats ${playerSelection}`);
+      return "computer"
       break;
     default:
-      return `You won, ${playerSelection} beats ${computerSelection}`
+      console.log(`You won, ${playerSelection} beats ${computerSelection}`);
+      return "player"
   }
 }
