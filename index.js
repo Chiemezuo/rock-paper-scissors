@@ -1,4 +1,11 @@
-const computerPlay = () => {
+const buttons = document.querySelectorAll('button')
+Array.from(buttons).forEach((element) => {
+  element.addEventListener('click', (e) => {
+    console.log(playRound(e.target.value, computerPlay()))
+  })
+})
+
+function computerPlay() {
   const arr = ["rock", "paper", "scissors"]
   return arr[Math.floor(Math.random() * 3)]
 }
@@ -24,7 +31,7 @@ function game() {
   playerPoints === computerPoints ? console.log('stalemate') : playerPoints > computerPoints ? console.log("Winner winner, chicken dinner") : console.log("You got your ass kicked")
 }
 
-game()
+// game()
 
 function playRound(playerSelection, computerSelection) {
   switch (playerSelection){
