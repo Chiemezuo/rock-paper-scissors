@@ -7,19 +7,19 @@ function game() {
   let playerPoints = 0;
   let computerPoints = 0;
 
-  for (let i = 0; i < 5; i++){
+  // for (let i = 0; i < 5; i++){
     const playerSelection = prompt("Rock, paper, or scissors? ").toLowerCase().trim()
     const computerSelection = computerPlay()
     const winner = playRound(playerSelection, computerSelection)
-    console.group(`Round ${i+1}`)
+    // console.group(`Round ${i+1}`)
       if (winner === 0){
         return console.log("You clearly do not want to play")
       }
       if (winner !== "draw"){
         winner === "player" ? playerPoints+=1 : computerPoints+=1
       }
-    console.groupEnd()
-  }
+    // console.groupEnd()
+  // }
 
   playerPoints === computerPoints ? console.log('stalemate') : playerPoints > computerPoints ? console.log("Winner winner, chicken dinner") : console.log("You got your ass kicked")
 }
