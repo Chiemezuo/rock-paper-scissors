@@ -1,4 +1,6 @@
 const buttons = document.querySelectorAll('button')
+const resultStatement = document.querySelector('#result-statement')
+
 Array.from(buttons).forEach((element) => {
   element.addEventListener('click', (e) => {
     console.log(playRound(e.target.value, computerPlay()))
@@ -52,15 +54,13 @@ function playRound(playerSelection, computerSelection) {
 function checker(playerSelection, computerSelection, arr) {
   switch (arr.indexOf(computerSelection)) {
     case 0:
-       console.log(`You drew`);
-       return "draw"
+      return resultStatement.innerText = `You drew`;
       break;
     case 1:
-      console.log(`You lost, ${computerSelection} beats ${playerSelection}`);
-      return "computer"
+      return resultStatement.innerText = `You lost, ${computerSelection} beats ${playerSelection}`;
       break;
     default:
-      console.log(`You won, ${playerSelection} beats ${computerSelection}`);
-      return "player"
+      return resultStatement.innerText = `You won, ${playerSelection} beats ${computerSelection}`;
+       
   }
 }
