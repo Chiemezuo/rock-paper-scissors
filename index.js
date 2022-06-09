@@ -1,9 +1,22 @@
 const buttons = document.querySelectorAll('button')
+const reset = document.querySelector('#reset')
 const resultStatement = document.querySelector('#result-statement')
+const buttonArr = Array.from(buttons)
+let playerPoints = 1;
+let computerPoints = 1;
 
-Array.from(buttons).forEach((element) => {
+reset.onclick = function(e) {
+  playerPoints = 1;
+  computerPoints = 1;
+}
+
+buttonArr.forEach((element) => {
   element.addEventListener('click', (e) => {
-    console.log(playRound(e.target.value, computerPlay()))
+    if (playerPoints >= 5 || computerPoints >= 5)
+      resultStatement.innerText = `Round winner: ${playerPoints > computerPoints ? `You` : `AI`}`
+    else {
+      startGame(e)
+    }
   })
 })
 
@@ -12,28 +25,12 @@ function computerPlay() {
   return arr[Math.floor(Math.random() * 3)]
 }
 
-function game() {
-  let playerPoints = 0;
-  let computerPoints = 0;
+function startGame(e) {
+  const winner = playRound(e.target.value, computerPlay())
 
-  // for (let i = 0; i < 5; i++){
-    const playerSelection = prompt("Rock, paper, or scissors? ").toLowerCase().trim()
-    const computerSelection = computerPlay()
-    const winner = playRound(playerSelection, computerSelection)
-    // console.group(`Round ${i+1}`)
-      if (winner === 0){
-        return console.log("You clearly do not want to play")
-      }
-      if (winner !== "draw"){
-        winner === "player" ? playerPoints+=1 : computerPoints+=1
-      }
-    // console.groupEnd()
-  // }
+  if (winner !== 'draw') winner === 'player' ? ++playerPoints : ++computerPoints
 
-  playerPoints === computerPoints ? console.log('stalemate') : playerPoints > computerPoints ? console.log("Winner winner, chicken dinner") : console.log("You got your ass kicked")
 }
-
-// game()
 
 function playRound(playerSelection, computerSelection) {
   switch (playerSelection){
@@ -54,13 +51,16 @@ function playRound(playerSelection, computerSelection) {
 function checker(playerSelection, computerSelection, arr) {
   switch (arr.indexOf(computerSelection)) {
     case 0:
-      return resultStatement.innerText = `You drew`;
+      resultStatement.innerText = `You drew`
+      return `draw`;
       break;
     case 1:
-      return resultStatement.innerText = `You lost, ${computerSelection} beats ${playerSelection}`;
+      resultStatement.innerText = `You lost, ${computerSelection} beats ${playerSelection}`
+      return `computer`;
       break;
     default:
-      return resultStatement.innerText = `You won, ${playerSelection} beats ${computerSelection}`;
+      resultStatement.innerText = `You won, ${playerSelection} beats ${computerSelection}`
+      return `player`;
        
   }
 }
